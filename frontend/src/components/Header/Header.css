@@ -6,6 +6,7 @@
    background-size: cover;
    background-position: center;
    overflow: hidden;
+   margin-bottom: 3.5rem;
 }
 
 .header-contents {
