@@ -1,7 +1,7 @@
 .header {
    height: 34vw;
    margin: 30px auto;
-   background: url('./header_img.png');
+   background: url('../../assets/header_img.png');
    position: relative;
    background-size: cover;
    background-position: center;
@@ -17,7 +17,7 @@
    max-width: 50%;
    bottom: 10%;
    left: 6vw;
-   animation: fade-in 3s ;
+   animation: fade-in 3s;
 }
 
 .header-contents h2 {
