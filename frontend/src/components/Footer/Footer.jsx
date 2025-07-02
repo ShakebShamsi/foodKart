@@ -7,7 +7,7 @@ const Footer = () => {
          <div className="footer-content">
             <div className='footer-content-left'>
                <img className='footer-logo' src={assets.logo} alt="" />
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, incidunt?</p>
+               <p>FoodKart is your go-to platform for delicious meals delivered right to your door. We partner with trusted kitchens to bring you fresh, affordable, and satisfying food — every single time.</p>
                <div className="footer-social-icons">
                   <img src={assets.facebook_icon} alt="" />
                   <img src={assets.twitter_icon} alt="" />
