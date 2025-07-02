@@ -29,7 +29,7 @@
 .header-contents p {
    color: white;
    font-size: 1vw;
-   z-index: 9999;
+   z-index: 1;
 }
 
 .header-contents button {
@@ -47,4 +47,21 @@
    cursor: pointer;
    transform: scale(1.05);
    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+/*  Media Queries */
+@media (max-width: 1050px) {
+   .header-contents{
+      max-width: 45%;
+   }
+}
+@media (max-width: 750px) {
+   .header-contents{
+      max-width: 65%;
+   }
+   .header-contents P{
+      display: none;
+   }
+   .header-contents button{
+      padding: 2vw 4vw;
+   }
 }
