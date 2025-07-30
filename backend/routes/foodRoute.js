@@ -1,5 +1,5 @@
 import express from 'express';
-import { addFood } from '../controllers/foodController.js';
+import { addFood, getAllFoods, removeFood } from '../controllers/foodController.js';
 import multer from 'multer';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import cloudinary from '../cloudinaryConfig.js';
@@ -18,5 +18,8 @@ const foodStorage = new CloudinaryStorage({
 const upload = multer({ storage: foodStorage });
 
 foodRouter.post('/add', upload.single("image"), addFood);
+foodRouter.get('/allFoods', getAllFoods);
+foodRouter.delete('/remove/:id', removeFood);
+
 
 export default foodRouter;
