@@ -18,7 +18,7 @@ const foodStorage = new CloudinaryStorage({
 const upload = multer({ storage: foodStorage });
 
 foodRouter.post('/add', upload.single("image"), addFood);
-foodRouter.get('/allFoods', getAllFoods);
+foodRouter.get('/list', getAllFoods);
 foodRouter.delete('/remove/:id', removeFood);
 
 
