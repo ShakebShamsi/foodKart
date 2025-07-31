@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets'
 
 
-const List = ({url}) => {
-  
+const List = ({ url }) => {
+
    const [list, setList] = useState([])
 
    const fetchList = async () => {
@@ -57,7 +57,7 @@ const List = ({url}) => {
                list.map((item, index) => {
                   return (
                      <div key={index} className="list-table-format">
-                        <img className='item-img' src={item.image} alt={item.name}/>
+                        <img className='item-img' src={item.image} alt={item.name} />
                         <p>{item.name}</p>
                         <p>{item.category}</p>
                         <p>₹{item.price}</p>
