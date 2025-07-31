@@ -1,12 +1,10 @@
 import  { useState } from 'react'
 import './Add.css';
-import { assets } from '../../assets/assets';
+import { assets } from '../../assets/assets'; 
 import axiso from 'axios';
 import { toast } from 'react-toastify';
 
-const Add = () => {
-
-   const url = 'http://localhost:4000';
+const Add = ({url}) => {
 
    const [image, setImage] = useState(false);
    const [data, setData] = useState({

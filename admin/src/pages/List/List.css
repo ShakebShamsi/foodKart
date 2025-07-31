@@ -12,9 +12,16 @@
    background-color: #f9f9f9 ;
 }
 
-.list-table-format img{
-   width: 50px;
+.list-table-format .item-img {
+   width: 70px;
 }
+.list-table-format .bin-img {
+   width: 35px;
+}
+.list-table-format .bin-img:hover {
+   scale: 1.2;
+}
+
 
 
 @media (max-width: 600px){
