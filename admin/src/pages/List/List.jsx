@@ -10,7 +10,6 @@ const List = () => {
    const fetchList = async () => {
       try {
          const response = await axios.get(`${url}/api/food/list`);
-         console.log("API response:", response.data);
          if (response.data.success) {
             setList(response.data.foods);
          } else {
@@ -20,6 +19,11 @@ const List = () => {
          console.error("API Error:", error);
          toast.error("Error fetching food list");
       }
+   }
+
+   const removeFood =async (foodId) => {
+      const response = await axios.post(`${url}/api/food/remove`, { id: foodId });
+      
    }
 
    useEffect(() => {
@@ -41,11 +45,11 @@ const List = () => {
             list.map((item, index) => {
                return (
                   <div key={index} className="list-table-format">
-                     <img src={item.image} alt={item.name} /*style={{ width: "100px" }}*/ />
+                     <img src={item.image} alt={item.name} style={{ width: "60px" }} />
                      <p>{item.name}</p>
                      <p>{item.category}</p>
                      <p>₹{item.price}</p>
-                     <p>X</p>
+                     <p onClick={()=>removeFood(item._id)} className='cursor'>X</p>
                   </div>
                )
             })}
