@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import foodRouter from './routes/foodRoute.js';
 import userRouter from './routes/userRoute.js';
 import 'dotenv/config.js'
+import cartRouter from './routes/cartRoute.js';
 
 
 //App configuration
@@ -24,6 +25,8 @@ connectDB();
 //API enpoints
 app.use('/api/food', foodRouter)
 app.use('/api/user/', userRouter)
+app.use('/api/cart/', cartRouter)
+
 
 
 

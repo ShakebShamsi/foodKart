@@ -22,7 +22,6 @@ const loginUser = async (req, res) => {
       const token = createToken(user._id)
       return  res.json({success: true, token})
    } catch (error) {
-      console.log(error);
       return  res.json({success: false, message:"Error"})
       
    }
