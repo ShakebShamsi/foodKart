@@ -25,8 +25,14 @@
    border: none;
 }
 
-.cart-items-item .cross {
+.cart-items-item .cursor {
    cursor: pointer;
+}
+.cart-items-item img{
+   width: 40px;
+}
+.cart-items-item img:hover{
+   scale: 1.2;
 }
 
 .cart-bottom {

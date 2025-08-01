@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import './Cart.css'
 import { StoreContext } from '../../context/StoreContext'
 import { useNavigate } from 'react-router-dom'
+import { assets } from '../../assets/assets'
 
 const Cart = () => {
    const { cartItems, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
@@ -31,7 +32,7 @@ const Cart = () => {
                            <p>₹{item.price}</p>
                            <p>{cartItems[item._id]}</p>
                            <p>₹{item.price * cartItems[item._id]}</p>
-                           <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
+                           <img onClick={() => removeFromCart(item._id)} className='bin-img cursor' src={assets.bin_img} alt="" />
                         </div>
                         <hr />
                      </div>
@@ -58,7 +59,7 @@ const Cart = () => {
                      <b>₹{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 49}</b>
                   </div>
                </div>
-                  <button onClick={() => navigate('/order')}>CHECKOUT</button>
+               <button onClick={() => navigate('/order')}>CHECKOUT</button>
             </div>
             <div className="cart-promocode">
                <div>
