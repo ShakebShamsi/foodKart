@@ -7,6 +7,7 @@
    background-position: center;
    overflow: hidden;
    margin-bottom: 3.5rem;
+   z-index: -1;
 }
 
 .header-contents {
