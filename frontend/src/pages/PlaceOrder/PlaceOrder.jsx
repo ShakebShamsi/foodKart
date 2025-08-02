@@ -1,4 +1,5 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './PlaceOrder.css'
 import { StoreContext } from '../../context/StoreContext'
 import { useState } from 'react'
@@ -28,6 +29,10 @@ const PlaceOrder = () => {
 
    const placeOrder = async (event) => {
       event.preventDefault();
+      if (getTotalCartAmount() === 0) {
+         alert("Your cart is empty. Please add items before proceeding to payment.");
+         return;
+      }
       let orderItems = [];
       food_list.map((item) => {
          if (cartItems[item._id] > 0) {
@@ -52,6 +57,16 @@ const PlaceOrder = () => {
          alert("Error")
       }
    }
+
+   const navigate = useNavigate();
+   useEffect(() => {
+      if (!token) {
+         navigate('/cart')
+      }
+      else if (getTotalCartAmount() === 0) {
+         navigate('/cart')
+      }
+   }, [token, cartItems])
 
    return (
       <form onSubmit={placeOrder} className='place-order'>
