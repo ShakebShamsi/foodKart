@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import './PlaceOrder.css'
 import { StoreContext } from '../../context/StoreContext'
 import { useState } from 'react'
+import axios from 'axios'
 
 const PlaceOrder = () => {
    const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext)
@@ -35,8 +36,21 @@ const PlaceOrder = () => {
             orderItems.push(itemInfo)
          }
       })
-      console.log(orderItems);
 
+      let orderData = {
+         address: data,
+         items: orderItems,
+         amount: getTotalCartAmount() + 49
+      }
+
+      let response = await axios.post(url + "/api/order/place", orderData, { headers: { token } })
+      if (response.data.success) {
+         const { session_url } = response.data;
+         window.location.replace(session_url);
+      }
+      else {
+         alert("Error")
+      }
    }
 
    return (
@@ -52,7 +66,7 @@ const PlaceOrder = () => {
                   type="text"
                   placeholder='First Name'
                   required
-                  pattern="[A-Za-z]"
+                  pattern="[A-Za-z]+$"
                   title="Only letters allowed"
                />
                <input
@@ -62,7 +76,7 @@ const PlaceOrder = () => {
                   type="text"
                   placeholder='Last Name'
                   required
-                  pattern="[A-Za-z]"
+                  pattern="[A-Za-z]+$"
                   title="Only letters allowed"
                />
             </div>
