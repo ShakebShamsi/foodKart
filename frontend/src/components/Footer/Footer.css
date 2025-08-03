@@ -54,6 +54,11 @@
    height: 2px;
    margin: 5px 0;
 }
+
+.footer-item {
+   width: fit-content;
+}
+
 .footer-item:hover{
  border-bottom: 2px solid tomato;
 }
