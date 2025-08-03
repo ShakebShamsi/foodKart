@@ -16,7 +16,7 @@ const port = 4000;
 
 //Middleware
 app.use(express.json());
-app.use(cors({ origin: `https://foodkart-hkt8.onrender.com` }));
+app.use(cors({ origin: `https://foodkart-nje9.onrender.com` }));
 
 
 
