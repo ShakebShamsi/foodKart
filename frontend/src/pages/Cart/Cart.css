@@ -107,12 +107,19 @@
 
 .empty-cart{
    display: flex;
+   align-items: center;
    justify-content: center;
+   flex-direction: column;
 }
 
 .empty-cart img{
-   height: 60vh;
+   width: 30vw;
 }
+.empty-cart p{
+   color:gray ;
+}
+
+.
 
 /* Media Queries*/
 @media (max-width:750px) {

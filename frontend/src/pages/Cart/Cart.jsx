@@ -81,6 +81,7 @@ const Cart = () => {
          ) : (
             <div className='empty-cart'>
                   <img src={assets.empty_cart} alt="" />
+                  <p>Please add item(s) to cart first</p>
             </div>
          )}
       </div>
