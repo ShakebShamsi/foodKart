@@ -105,6 +105,15 @@
    cursor: pointer;
 }
 
+.empty-cart{
+   display: flex;
+   justify-content: center;
+}
+
+.empty-cart img{
+   height: 60vh;
+}
+
 /* Media Queries*/
 @media (max-width:750px) {
    .cart-bottom {
