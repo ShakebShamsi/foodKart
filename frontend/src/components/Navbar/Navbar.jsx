@@ -22,21 +22,65 @@ const Navbar = ({ setShowLogin }) => {
          <ul className="navbar-menu">
             <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</Link>
             <a
-               href='#explore-menu'
-               onClick={() => setMenu("menu")}
-               className={menu === "menu" ? "active" : ""}>
+               onClick={(e) => {
+                  e.preventDefault();
+                  setMenu("menu");
+                  if (window.location.pathname !== "/") {
+                     navigate("/", { replace: false });
+                     setTimeout(() => {
+                        const section = document.getElementById("explore-menu");
+                        section?.scrollIntoView({ behavior: "smooth" });
+                     }, 100);
+                  } else {
+                     const section = document.getElementById("explore-menu");
+                     section?.scrollIntoView({ behavior: "smooth" });
+                  }
+               }}
+               className={menu === "menu" ? "active" : ""}
+            >
                Menu
             </a>
-            <a href='#app-download'
-               onClick={() => setMenu("mobile-app")}
-               className={menu === "mobile-app" ? "active" : ""}>
+
+            <a
+               onClick={(e) => {
+                  e.preventDefault();
+                  setMenu("mobile-app");
+                  if (window.location.pathname !== "/") {
+                     navigate("/", { replace: false });
+                     setTimeout(() => {
+                        const section = document.getElementById("app-download");
+                        section?.scrollIntoView({ behavior: "smooth" });
+                     }, 100);
+                  } else {
+                     const section = document.getElementById("app-download");
+                     section?.scrollIntoView({ behavior: "smooth" });
+                  }
+               }}
+               className={menu === "mobile-app" ? "active" : ""}
+            >
                Mobile-App
             </a>
-            <a href='#footer'
-               onClick={() => setMenu("contact-us")}
-               className={menu === "contact-us" ? "active" : ""}>
+
+            <a
+               onClick={(e) => {
+                  e.preventDefault();
+                  setMenu("contact-us");
+                  if (window.location.pathname !== "/") {
+                     navigate("/", { replace: false });
+                     setTimeout(() => {
+                        const section = document.getElementById("footer");
+                        section?.scrollIntoView({ behavior: "smooth" });
+                     }, 100);
+                  } else {
+                     const section = document.getElementById("footer");
+                     section?.scrollIntoView({ behavior: "smooth" });
+                  }
+               }}
+               className={menu === "contact-us" ? "active" : ""}
+            >
                Contact Us
             </a>
+
          </ul>
          <div className="navbar-right">
             <img src={assets.search_icon} alt="" />
@@ -55,7 +99,6 @@ const Navbar = ({ setShowLogin }) => {
                      <li onClick={logout}><img src={assets.logout_icon} alt="" /><p>Logout</p></li>
                   </ul>
                </div>}
-
          </div>
       </div>
    )
