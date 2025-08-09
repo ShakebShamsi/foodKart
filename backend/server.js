@@ -16,7 +16,24 @@ const port = 4000;
 
 //Middleware
 app.use(express.json());
-app.use(cors({ origin: `https://foodkart-nje9.onrender.com` }));
+// app.use(cors({ origin: `https://foodkart-nje9.onrender.com` }));
+// Define allowed origins dynamically for local development and prod
+const allowedOrigins = [
+  'https://foodkart-nje9.onrender.com',  // production URL
+  'http://localhost:5173',                // FoodKart UI local URL
+  'http://localhost:5000',                // Admin local URL
+];
+
+// CORS middleware setup
+app.use(cors({ 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 
 
