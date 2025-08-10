@@ -131,7 +131,10 @@
 .navbar-inventory-icon{
    position: relative;
 }
-
+.nav-icon{
+   width: 35px;
+   height: 35px;
+}
 
 
 /* Media Queries */

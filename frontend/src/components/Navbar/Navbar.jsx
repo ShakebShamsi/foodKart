@@ -87,23 +87,23 @@ const Navbar = ({ setShowLogin }) => {
 
          </ul>
          <div className="navbar-right">
-            <img src={assets.search_icon} alt="" />
+            <img className='nav-icon' src={assets.search_icon} alt="" />
             <div className="navbar-search-icon">
                <Link to='/cart'>
-                  <img src={assets.basket_icon} alt="" />
+                  <img className='nav-icon' src={assets.basket_icon} alt="" />
                </Link>
                <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
             </div>
             {isAdminUser && (
                <div className="navbar-inventory-icon">
                   <Link to='https://foodkart-inventory.onrender.com' target="_blank" rel="noopener noreferrer">
-                     <img src={assets.inventory_icon} alt="" />
+                     <img className='nav-icon' src={assets.inventory_icon} alt="" />
                   </Link>
                </div>
             )}
-            {!token ? <button onClick={() => setShowLogin(true)}>Sign in</button>
+            {!token ? <button  onClick={() => setShowLogin(true)}>Sign in</button>
                : <div className='navbar-profile'>
-                  <img src={assets.profile_icon} alt="" />
+                  <img className='nav-icon' src={assets.profile_icon} alt="" />
                   <ul className="nav-profile-dropdown">
                      <li onClick={() => navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
                      <hr />
