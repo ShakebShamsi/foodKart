@@ -62,6 +62,7 @@ import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
 import empty_cart from './empty-cart.png'
 import inventory_icon from './inventory_icon.gif'
+import user_icon from './user_icon.png'
 
 
 
@@ -87,7 +88,8 @@ export const assets = {
    parcel_icon,
    bin_img,
    empty_cart,
-   inventory_icon
+   inventory_icon,
+   user_icon
 }
 
 export const menu_list = [
