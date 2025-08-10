@@ -128,7 +128,9 @@
 .nav-profile-dropdown li::after {
   display: none !important;
 }
-
+.navbar-inventory-icon{
+   position: relative;
+}
 
 
 

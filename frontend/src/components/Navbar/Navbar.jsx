@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,13 +7,17 @@ import { StoreContext } from '../../context/StoreContext'
 
 const Navbar = ({ setShowLogin }) => {
    const [menu, setMenu] = useState("home")
-   const { getTotalCartAmount, token, setToken } = useContext(StoreContext)
+   const { getTotalCartAmount, token, setToken, getLogedInUserInfo } = useContext(StoreContext)
    const navigate = useNavigate();
+   const isAdminUser = getLogedInUserInfo()?.isAdmin;
+
    const logout = () => {
       localStorage.removeItem("token")
       setToken("")
       navigate('/')
    }
+
+
    return (
       <div className='navbar'>
          <Link to='/'>
@@ -90,6 +94,13 @@ const Navbar = ({ setShowLogin }) => {
                </Link>
                <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
             </div>
+            {isAdminUser && (
+               <div className="navbar-inventory-icon">
+                  <Link to='https://foodkart-inventory.onrender.com' target="_blank" rel="noopener noreferrer">
+                     <img src={assets.inventory_icon} alt="" />
+                  </Link>
+               </div>
+            )}
             {!token ? <button onClick={() => setShowLogin(true)}>Sign in</button>
                : <div className='navbar-profile'>
                   <img src={assets.profile_icon} alt="" />
