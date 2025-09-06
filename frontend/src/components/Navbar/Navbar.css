@@ -2,6 +2,13 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+   z-index: 1;
+   position: sticky;
+   top: 0px;
+   background: #ffffff;
+   box-shadow: 0px 0px 35px gray;
+   border-radius: 7px;
+   padding: 0 25px;
 }
 
 .navbar .logo {
