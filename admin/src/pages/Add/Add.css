@@ -1,48 +1,134 @@
+/* --- Container & form --- */
 .add{
-   width: 70%;
-   margin-left: max(5vw, 25px);
-   margin-top: 50px;
-   color: #6d6d6d;
-   font-size: 16px;
+  width: 70%;
+  margin-left: max(5vw, 25px);
+  margin-top: 50px;
+  color: #6d6d6d;
+  font-size: 16px;
 }
 
 .add form{
-   gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+/* --- Image preview area --- */
+.add-img-upload { gap: 10px; }
+
+.add-img-wrapper{
+  position: relative;
+  display: inline-block;
+  width: max(40%, 280px);   
+}
+
+.add-img-label{
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Use your sizing; add border & background for a nicer frame */
 .add-product-img {
-   width: max(40%, 280px);
-   object-fit: contain;
+   width: 100%; 
+   max-width: 100%;
+   max-height: 280px;
+  object-fit: contain;
+  background: #fafafa;
+  border: 2px dashed #d0d0d0;
+  border-radius: 12px;
+  padding: 8px;
+  box-sizing: border-box;
+  object-fit: contain;
 }
 
+/* Remove (×) button on the image – hidden until hover */
+.add-img-remove{
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: #ff4d4f;
+  color: #fff;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.add-img-wrapper:hover .add-img-remove,
+.add-img-remove:focus-visible{
+  opacity: 1;
+  pointer-events: auto;
+}
+.add-img-remove:active{ transform: scale(.96); }
+
+/* Optional: Change image button below the preview */
+.add-img-reupload-btn{
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  width: max-content;
+}
+.add-img-reupload-btn:hover{ background: #f6f6f6; }
+
+/* --- Inputs & textareas --- */
 .add-product-name, .add-product-description{
-   width: max(40%, 280px);
+  width: max(40%, 280px);
 }
 
 .add-product-name input, .add-product-description textarea{
-   width: 100%;
-   padding: 10px;
-   border: 1px solid #a9a9a9;
-   border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #a9a9a9;
+  border-radius: 5px;
 }
 
+/* --- Category & Price row --- */
 .add-category-price{
-   display: flex;
-   gap: 30px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;                 /* responsive */
 }
 
 .add-category-price select, .add-category-price input{
-   max-width: 120px;
-   padding: 10px;
-   border-radius: 5px;
+  max-width: 120px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #a9a9a9;
 }
 
+/* --- Submit button --- */
 .add-btn{
-   max-width: 120px;
-   padding: 10px;
-   background-color: tomato;
-   color: #fff;
-   border: none;
-   border-radius: 5px;
-   cursor: pointer;
+  max-width: 120px;
+  padding: 10px;
+  background-color: tomato;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-btn:disabled{
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+/* --- Small screens --- */
+@media (max-width: 640px){
+  .add{
+    width: 92%;
+    margin-left: 4%;
+  }
+  .add-img-wrapper{ width: 100%; }
+  .add-product-name, .add-product-description{ width: 100%; }
 }
