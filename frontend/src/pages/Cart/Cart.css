@@ -4,20 +4,20 @@
 
 .cart-items-title {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr ;
   align-items: center;
   color: grey;
   font-size: max(1vw, 12px);
-  column-gap: 12px;
+  column-gap: 150px;
 }
 
 .cart-items-item {
   margin: 10px 0;
   color: black;
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr;
   align-items: center;
-  column-gap: 12px;
+  column-gap: 150px;
 }
 
 .cart-items-item > img:first-child {

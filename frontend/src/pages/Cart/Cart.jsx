@@ -30,12 +30,12 @@ const Cart = () => {
       flash(id, 'remove');
    };
 
-   const removeAllOfItem = (id) => {
-      const qty = cartItems[id] || 0;
-      if (qty <= 0) return;
-      for (let i = 0; i < qty; i++) removeFromCart(id);
-      flash(id, 'remove');
-   };
+   // const removeAllOfItem = (id) => {
+   //    const qty = cartItems[id] || 0;
+   //    if (qty <= 0) return;
+   //    for (let i = 0; i < qty; i++) removeFromCart(id);
+   //    flash(id, 'remove');
+   // };
 
    return (
       <div className='cart'>
@@ -48,7 +48,7 @@ const Cart = () => {
                      <p>Price</p>
                      <p>Quantity</p>
                      <p>Total</p>
-                     <p>Remove</p>
+                     {/* <p>Remove</p> */}
                   </div>
                   <br />
                   <hr />
@@ -70,7 +70,6 @@ const Cart = () => {
                               <img src={item.image} alt={item.name} />
                               <p>{item.name}</p>
                               <p>₹{item.price}</p>
-
                               <div className={`qty-control ${pulseClass}`}>
                                  <button
                                     className="qty-btn"
@@ -95,14 +94,6 @@ const Cart = () => {
                               </div>
 
                               <p>₹{item.price * qty}</p>
-
-                              <img
-                                 onClick={() => removeAllOfItem(item._id)}
-                                 className='bin-img cursor remove-all'
-                                 src={assets.bin_img}
-                                 alt="Remove all"
-                                 title="Remove all of this item"
-                              />
                            </div>
                            <hr />
                         </div>
