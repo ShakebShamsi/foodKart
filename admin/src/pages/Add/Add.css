@@ -10,8 +10,9 @@
    gap: 20px;
 }
 
-.add-product-name img{
-   width: 120px;
+.add-product-img {
+   width: max(40%, 280px);
+   object-fit: contain;
 }
 
 .add-product-name, .add-product-description{

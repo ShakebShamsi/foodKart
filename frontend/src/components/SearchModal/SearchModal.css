@@ -127,3 +127,32 @@
 .add-btn.added {
   background: green;
 }
+
+.inline-qty-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-qty-control .qty-btn {
+  background: transparent;
+  border: 0;
+  padding: 6px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.inline-qty-control .qty-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+.inline-qty-control .qty-badge {
+  min-width: 36px;
+  text-align: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  font-weight: 700;
+}
