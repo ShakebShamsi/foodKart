@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link, useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
 import { StoreContext } from '../../context/StoreContext'
+import SearchModal from '../SearchModal/SearchModal'
 
 const Navbar = ({ setShowLogin }) => {
    const [menu, setMenu] = useState("home")
@@ -12,109 +12,125 @@ const Navbar = ({ setShowLogin }) => {
    const isAdminUser = getLogedInUserInfo()?.isAdmin;
    const userName = getLogedInUserInfo()?.name;
 
+   const [isSearchOpen, setIsSearchOpen] = useState(false);
+   const openSearchModal = () => setIsSearchOpen(true);
+   const closeSearchModal = () => setIsSearchOpen(false);
+
    const logout = () => {
       localStorage.removeItem("token")
       setToken("")
       navigate('/')
    }
 
-
    return (
-      <div className='navbar'>
-         <Link to='/'>
-            <img src={assets.logo} alt="" className='logo' />
-         </Link>
-         <ul className="navbar-menu">
-            <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</Link>
-            <a
-               onClick={(e) => {
-                  e.preventDefault();
-                  setMenu("menu");
-                  if (window.location.pathname !== "/") {
-                     navigate("/", { replace: false });
-                     setTimeout(() => {
+      <>
+         <div className='navbar'>
+            <Link to='/'>
+               <img src={assets.logo} alt="" className='logo' />
+            </Link>
+
+            <ul className="navbar-menu">
+               <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</Link>
+
+               <a
+                  onClick={(e) => {
+                     e.preventDefault();
+                     setMenu("menu");
+                     if (window.location.pathname !== "/") {
+                        navigate("/", { replace: false });
+                        setTimeout(() => {
+                           const section = document.getElementById("explore-menu");
+                           section?.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                     } else {
                         const section = document.getElementById("explore-menu");
                         section?.scrollIntoView({ behavior: "smooth" });
-                     }, 100);
-                  } else {
-                     const section = document.getElementById("explore-menu");
-                     section?.scrollIntoView({ behavior: "smooth" });
-                  }
-               }}
-               className={menu === "menu" ? "active" : ""}
-            >
-               Menu
-            </a>
+                     }
+                  }}
+                  className={menu === "menu" ? "active" : ""}
+               >
+                  Menu
+               </a>
 
-            <a
-               onClick={(e) => {
-                  e.preventDefault();
-                  setMenu("mobile-app");
-                  if (window.location.pathname !== "/") {
-                     navigate("/", { replace: false });
-                     setTimeout(() => {
+               <a
+                  onClick={(e) => {
+                     e.preventDefault();
+                     setMenu("mobile-app");
+                     if (window.location.pathname !== "/") {
+                        navigate("/", { replace: false });
+                        setTimeout(() => {
+                           const section = document.getElementById("app-download");
+                           section?.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                     } else {
                         const section = document.getElementById("app-download");
                         section?.scrollIntoView({ behavior: "smooth" });
-                     }, 100);
-                  } else {
-                     const section = document.getElementById("app-download");
-                     section?.scrollIntoView({ behavior: "smooth" });
-                  }
-               }}
-               className={menu === "mobile-app" ? "active" : ""}
-            >
-               Mobile-App
-            </a>
+                     }
+                  }}
+                  className={menu === "mobile-app" ? "active" : ""}
+               >
+                  Mobile-App
+               </a>
 
-            <a
-               onClick={(e) => {
-                  e.preventDefault();
-                  setMenu("contact-us");
-                  if (window.location.pathname !== "/") {
-                     navigate("/", { replace: false });
-                     setTimeout(() => {
+               <a
+                  onClick={(e) => {
+                     e.preventDefault();
+                     setMenu("contact-us");
+                     if (window.location.pathname !== "/") {
+                        navigate("/", { replace: false });
+                        setTimeout(() => {
+                           const section = document.getElementById("footer");
+                           section?.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                     } else {
                         const section = document.getElementById("footer");
                         section?.scrollIntoView({ behavior: "smooth" });
-                     }, 100);
-                  } else {
-                     const section = document.getElementById("footer");
-                     section?.scrollIntoView({ behavior: "smooth" });
-                  }
-               }}
-               className={menu === "contact-us" ? "active" : ""}
-            >
-               Contact Us
-            </a>
+                     }
+                  }}
+                  className={menu === "contact-us" ? "active" : ""}
+               >
+                  Contact Us
+               </a>
+            </ul>
 
-         </ul>
-         <div className="navbar-right">
-            <img className='nav-icon' src={assets.search_icon} alt="" />
-            <div className="navbar-search-icon">
-               <Link to='/cart'>
-                  <img className='nav-icon' src={assets.basket_icon} alt="" />
-               </Link>
-               <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
-            </div>
-            {isAdminUser && (
-               <div className="navbar-inventory-icon">
-                  <Link to='https://foodkart-inventory.onrender.com' target="_blank" rel="noopener noreferrer">
-                     <img className='nav-icon' src={assets.inventory_icon} alt="" />
+            <div className="navbar-right">
+               <img className='nav-icon' src={assets.search_icon} alt="Search" onClick={openSearchModal} />
+
+               <div className="navbar-search-icon">
+                  <Link to='/cart'>
+                     <img className='nav-icon' src={assets.basket_icon} alt="Cart" />
                   </Link>
+                  <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
                </div>
-            )}
-            {!token ? <button onClick={() => setShowLogin(true)}>Sign in</button>
-               : <div className='navbar-profile'>
-                  <img className='nav-icon' src={assets.profile_icon} alt="" />
-                  <ul className="nav-profile-dropdown">
-                     <li onClick={() => navigate('/myprofile')}><img src={assets.user_icon} alt="" /><p>{userName}</p></li>
-                     <hr />
-                     <li onClick={() => navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
-                     <hr />
-                     <li onClick={logout}><img src={assets.logout_icon} alt="" /><p>Logout</p></li>
-                  </ul>
-               </div>}
+
+               {isAdminUser && (
+                  <div className="navbar-inventory-icon">
+                     <Link to='https://foodkart-inventory.onrender.com' target="_blank" rel="noopener noreferrer">
+                        <img className='nav-icon' src={assets.inventory_icon} alt="Inventory" />
+                     </Link>
+                  </div>
+               )}
+
+               {!token ? (
+                  <button onClick={() => setShowLogin(true)}>Sign in</button>
+               ) : (
+                  <div className='navbar-profile'>
+                     <img className='nav-icon' src={assets.profile_icon} alt="Profile" />
+                     <ul className="nav-profile-dropdown">
+                        <li onClick={() => navigate('/myprofile')}><img src={assets.user_icon} alt="" /><p>{userName}</p></li>
+                        <hr />
+                        <li onClick={() => navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
+                        <hr />
+                        <li onClick={logout}><img src={assets.logout_icon} alt="" /><p>Logout</p></li>
+                     </ul>
+                  </div>
+               )}
+            </div>
          </div>
-      </div>
+
+         {/* Modal mounts here */}
+         <SearchModal isOpen={isSearchOpen} onClose={closeSearchModal} assets={assets} />
+      </>
    )
 }
 

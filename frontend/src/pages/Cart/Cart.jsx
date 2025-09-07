@@ -1,14 +1,41 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import './Cart.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 
 const Cart = () => {
-   const { cartItems, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+   const { cartItems, food_list, addToCart, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
    const navigate = useNavigate();
 
    const hasItemsInCart = Object.values(cartItems).some(quantity => quantity > 0);
+
+   const [flashMap, setFlashMap] = useState({});
+
+   const flash = (id, type) => {
+      setFlashMap(prev => ({ ...prev, [id]: type }));
+      setTimeout(() => {
+         setFlashMap(prev => ({ ...prev, [id]: null }));
+      }, 400);
+   };
+
+   const handleAdd = (id) => {
+      addToCart(id);
+      flash(id, 'add');
+   };
+
+   const handleRemoveOne = (id) => {
+      if (!cartItems[id]) return;
+      removeFromCart(id);
+      flash(id, 'remove');
+   };
+
+   const removeAllOfItem = (id) => {
+      const qty = cartItems[id] || 0;
+      if (qty <= 0) return;
+      for (let i = 0; i < qty; i++) removeFromCart(id);
+      flash(id, 'remove');
+   };
 
    return (
       <div className='cart'>
@@ -25,23 +52,61 @@ const Cart = () => {
                   </div>
                   <br />
                   <hr />
+
                   {food_list.map((item) => {
-                     if (cartItems[item._id] > 0) {
-                        return (
-                           <div key={item._id}>
-                              <div className='cart-items-title cart-items-item'>
-                                 <img src={item.image} alt="" />
-                                 <p>{item.name}</p>
-                                 <p>₹{item.price}</p>
-                                 <p>{cartItems[item._id]}</p>
-                                 <p>₹{item.price * cartItems[item._id]}</p>
-                                 <img onClick={() => removeFromCart(item._id)} className='bin-img cursor' src={assets.bin_img} alt="" />
+                     const qty = cartItems[item._id] || 0;
+                     if (qty <= 0) return null;
+
+                     const pulseClass =
+                        flashMap[item._id] === 'add'
+                           ? 'pulse-add'
+                           : flashMap[item._id] === 'remove'
+                              ? 'pulse-remove'
+                              : '';
+
+                     return (
+                        <div key={item._id}>
+                           <div className='cart-items-title cart-items-item'>
+                              <img src={item.image} alt={item.name} />
+                              <p>{item.name}</p>
+                              <p>₹{item.price}</p>
+
+                              <div className={`qty-control ${pulseClass}`}>
+                                 <button
+                                    className="qty-btn"
+                                    aria-label="Decrease quantity"
+                                    onClick={() => handleRemoveOne(item._id)}
+                                    disabled={qty <= 0}
+                                    title="Remove one"
+                                 >
+                                    <img src={assets.remove_icon_red} alt="-" />
+                                 </button>
+
+                                 <span className="qty-badge">{qty}</span>
+
+                                 <button
+                                    className="qty-btn"
+                                    aria-label="Increase quantity"
+                                    onClick={() => handleAdd(item._id)}
+                                    title="Add one"
+                                 >
+                                    <img src={assets.add_icon_green} alt="+" />
+                                 </button>
                               </div>
-                              <hr />
+
+                              <p>₹{item.price * qty}</p>
+
+                              <img
+                                 onClick={() => removeAllOfItem(item._id)}
+                                 className='bin-img cursor remove-all'
+                                 src={assets.bin_img}
+                                 alt="Remove all"
+                                 title="Remove all of this item"
+                              />
                            </div>
-                        );
-                     }
-                     return null;
+                           <hr />
+                        </div>
+                     );
                   })}
                </div>
 
@@ -80,8 +145,8 @@ const Cart = () => {
             </>
          ) : (
             <div className='empty-cart'>
-                  <img src={assets.empty_cart} alt="" />
-                  <p>Please add item(s) to cart first</p>
+               <img src={assets.empty_cart} alt="Empty cart" />
+               <p>Please add item(s) to cart first</p>
             </div>
          )}
       </div>
